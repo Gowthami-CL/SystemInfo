@@ -20,3 +20,16 @@ IARM_Result_t isAvailable(void *arg)
     LOG_INFO("[%s] IARM_BUS_SYSTEMINFO_API_isAvailable is called", MODULE_NAME);
     return IARM_RESULT_SUCCESS;
 }
+
+void systemInfo_Loop()
+{
+    time_t curr = 0;
+    while(1)
+    {
+        time(&curr);
+#if !defined(ENABLE_XCAM_SUPPORT) && !defined(XHB1) && !defined(XHC3)
+        printf("I-ARM NET-SRV-MGR: HeartBeat at %s\r\n", ctime(&curr));
+#endif
+        sleep(60);
+    }
+}
