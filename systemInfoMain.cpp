@@ -1,8 +1,11 @@
 //static void netSrvMgr_start();
 static void systemInfo_Loop();
-
+#ifdef ENABLE_IARM
 static IARM_Result_t isAvailable(void *arg);
+#endif
 
+int main(int argc, char *argv[])
+{
 IARM_Bus_RegisterCall(IARM_BUS_SYSTEMINFO_API_isAvailable, isAvailable);
 
 #ifdef ENABLE_SD_NOTIFY
@@ -13,6 +16,7 @@ IARM_Bus_RegisterCall(IARM_BUS_SYSTEMINFO_API_isAvailable, isAvailable);
 #endif
     //netSrvMgr_start();
     systemInfo_Loop();
+}
 
 IARM_Result_t isAvailable(void *arg)
 {
